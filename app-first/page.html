@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>First</title>
+    <style>
+        body {
+            padding: 20px;
+            background: #00FF00;
+        }
+
+        .myClass {
+            width: 600px;
+            height: 320px;
+            border: 1px solid white;
+        }
+
+        #btn {
+            padding: 10px;
+            border: 1px solid black;
+            background: #999999;
+            color: white;
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>First</h1>
+<h2 id = "boxForContent">0</h2>
+<br>
+<iframe class = "myClass" src = "http://localhost:5002/page" name = "myIframeABC"></iframe>
+<br>
+<h3>Продолжение страницы</h3>
+<br>
+<button id = "btn">Отправить сообщение в iframe</button>
+
+<script>
+    "use strict";
+
+    let count = 0;
+
+    window.addEventListener("message", function(myEvent) {
+        if(myEvent.data) {
+            const xxx = myEvent.data + "";
+            document.getElementById("boxForContent").innerHTML = xxx + "";
+        }
+    });
+
+    window.onload = function() {
+        document.getElementById("btn").onclick = function() {
+            count++;
+            const myIframeABC = window.frames.myIframeABC;
+            myIframeABC.postMessage(count + "", "*");
+        }
+    }
+</script>
+
+</body>
+</html>

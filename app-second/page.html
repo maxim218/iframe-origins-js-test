@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>Second</title>
+    <style>
+        body {
+            padding: 20px;
+            background: #CCCCCC;
+        }
+
+        button {
+            color: white;
+            background: blue;
+            padding: 15px;
+            border: 1px solid white;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Second</h1>
+<br>
+<h2 id = "resultBox">0</h2>
+<br>
+<button onclick = "f()">Отправить сообщение родителю</button>
+
+<script>
+    "use strict";
+
+    let x = 0;
+
+    window.addEventListener("message", function(myEvent) {
+        if(myEvent.data) {
+            const contentString = myEvent.data + "";
+            document.getElementById("resultBox").innerHTML = contentString + "";
+        }
+    });
+
+    function f() {
+        x++;
+        window.parent.postMessage(x + "", "*");
+    }
+</script>
+    
+</body>
+</html>
